@@ -16,7 +16,9 @@ class TableView<T:UIView> : UITableView {
     }
 
     func cell(indexPath: NSIndexPath) -> TableViewCell<T> {
-        return dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! TableViewCell<T>
+        let cell = dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! TableViewCell<T>
+        cell.view.setNeedsLayout()
+        return cell
     }
 
     // MARK:- Private
