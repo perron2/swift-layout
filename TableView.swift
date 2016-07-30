@@ -15,10 +15,19 @@ class TableView<T:UIView> : UITableView {
         setup()
     }
 
+    var autoBounce: Bool = true
+
     func cell(indexPath: NSIndexPath) -> TableViewCell<T> {
         let cell = dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! TableViewCell<T>
         cell.view.setNeedsLayout()
         return cell
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if autoBounce {
+            bounces = contentSize.height > frame.size.height
+        }
     }
 
     // MARK:- Private
