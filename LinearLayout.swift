@@ -15,12 +15,12 @@ enum Alignment {
     case Middle
 }
 
-class LinearLayoutParams : LayoutParams {
+class LinearLayoutParams: LayoutParams {
     var alignment: Alignment = .None
     var fill: CGFloat = 0
 }
 
-class LinearLayout : UIView {
+class LinearLayout: UIView {
     var orientation = Orientation.Vertical {
         didSet {
             setNeedsLayout()

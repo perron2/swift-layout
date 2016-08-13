@@ -1,6 +1,6 @@
 import UIKit
 
-class TableView<T:UIView> : UITableView {
+class TableView<T:UIView>: UITableView {
     convenience init() {
         self.init(frame: CGRectZero, style: .Plain)
     }

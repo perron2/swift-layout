@@ -1,17 +1,5 @@
 import UIKit
 
-/*enum SizeSpec {
-    static let Container = UIView()
-    static let Itself = UIView()
-
-    case MatchParent
-    case WrapContent
-    case Exact(length: CGFloat)
-//    case RelativeToWidth(reference: UIView, factor: CGFloat)
-//    case RelativeToHeight(reference: UIView, factor: CGFloat)
-//    case KeepAspect(factor: CGFloat)
-}*/
-
 struct Edge {
     let left: CGFloat
     let right: CGFloat
@@ -42,21 +30,23 @@ struct Edge {
     func growSize(size: CGSize) -> CGSize {
         let width = max(size.width + left + right, 0)
         let height = max(size.height + top + bottom, 0)
-        return CGSizeMake(width, height)
+        return CGSize(width: width, height: height)
     }
 
     func shrinkSize(size: CGSize) -> CGSize {
         let width = max(size.width - left - right, 0)
         let height = max(size.height - top - bottom, 0)
-        return CGSizeMake(width, height)
+        return CGSize(width: width, height: height)
     }
 
     func growRect(rect: CGRect) -> CGRect {
-        return CGRectMake(rect.origin.x - left, rect.origin.y - top, rect.width + left + right, rect.height + top + bottom)
+        return CGRect(x: rect.origin.x - left, y: rect.origin.y - top,
+                      width: rect.width + left + right, height: rect.height + top + bottom)
     }
 
     func shrinkRect(rect: CGRect) -> CGRect {
-        return CGRectMake(rect.origin.x + left, rect.origin.y + top, rect.width - left - right, rect.height - top - bottom)
+        return CGRect(x: rect.origin.x + left, y: rect.origin.y + top,
+                      width: rect.width - left - right, height: rect.height - top - bottom)
     }
 }
 
@@ -79,18 +69,20 @@ extension UIView {
     private struct Keys {
         static var layoutParamsKey = "layoutParams"
     }
-    
+
     var layoutParams: LayoutParams {
         get {
             if let lp = objc_getAssociatedObject(self, &Keys.layoutParamsKey) as? LayoutParams {
                 return lp
             }
             let lp = LayoutParams()
-            objc_setAssociatedObject(self, &Keys.layoutParamsKey, lp, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &Keys.layoutParamsKey,
+                                     lp, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
             return lp
         }
         set {
-            objc_setAssociatedObject(self, &Keys.layoutParamsKey, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &Keys.layoutParamsKey,
+                                     newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
 }
