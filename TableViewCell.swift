@@ -19,14 +19,14 @@ class TableViewCell<T:UIView>: UITableViewCell {
         }
     }
 
-    override func sizeThatFits(size: CGSize) -> CGSize {
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
         layoutIfNeeded()
-        var contentSize = view.sizeThatFits(CGSizeMake(view.bounds.width, CGFloat.max))
+        var contentSize = view.sizeThatFits(CGSize(width: view.bounds.width, height: CGFloat.greatestFiniteMagnitude))
         if let layout = view as? LinearLayout {
             contentSize.height = max(contentSize.height, layout.layoutParams.minHeight)
         }
 
-        return CGSizeMake(size.width, ceil(contentSize.height + 0.5))
+        return CGSize(width: size.width, height: ceil(contentSize.height + 0.5))
     }
     
     override func layoutSubviews() {
@@ -35,13 +35,13 @@ class TableViewCell<T:UIView>: UITableViewCell {
 
     // MARK:- Private
 
-    private var cellSize = CGSizeZero
+    private var cellSize = CGSize.zero
 
     private func setup() {
         let view = UIView()
         view.backgroundColor = UIColor(red: 65.5/100, green: 83.1/100, blue: 100/100, alpha: 0.5)
         selectedBackgroundView = view
-        layoutMargins = UIEdgeInsetsZero
+        layoutMargins = UIEdgeInsets.zero
         preservesSuperviewLayoutMargins = false
         self.addSubview(self.view)
     }

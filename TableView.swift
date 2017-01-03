@@ -2,7 +2,7 @@ import UIKit
 
 class TableView<T:UIView>: UITableView {
     convenience init() {
-        self.init(frame: CGRectZero, style: .Plain)
+        self.init(frame: CGRect.zero, style: .plain)
     }
 
     override init(frame: CGRect, style: UITableViewStyle) {
@@ -17,8 +17,8 @@ class TableView<T:UIView>: UITableView {
 
     var autoBounce: Bool = true
 
-    func cell(indexPath: NSIndexPath) -> TableViewCell<T> {
-        let cell = dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! TableViewCell<T>
+    func cell(_ indexPath: IndexPath) -> TableViewCell<T> {
+        let cell = dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell<T>
         cell.view.setNeedsLayout()
         return cell
     }
@@ -33,8 +33,8 @@ class TableView<T:UIView>: UITableView {
     // MARK:- Private
 
     private func setup() {
-        separatorInset = UIEdgeInsetsZero
-        registerClass(TableViewCell<T>.self, forCellReuseIdentifier: "cell")
+        separatorInset = UIEdgeInsets.zero
+        register(TableViewCell<T>.self, forCellReuseIdentifier: "cell")
         rowHeight = UITableViewAutomaticDimension
         estimatedRowHeight = Styles.minTouchSize
         if #available(iOS 9, *) {

@@ -1,27 +1,27 @@
 import UIKit
 
 enum Orientation {
-    case Vertical
-    case Horizontal
+    case vertical
+    case horizontal
 }
 
 enum Alignment {
-    case None
-    case Left
-    case Right
-    case Center
-    case Top
-    case Bottom
-    case Middle
+    case none
+    case left
+    case right
+    case center
+    case top
+    case bottom
+    case middle
 }
 
 class LinearLayoutParams: LayoutParams {
-    var alignment: Alignment = .None
+    var alignment: Alignment = .none
     var fill: CGFloat = 0
 }
 
 class LinearLayout: UIView {
-    var orientation = Orientation.Vertical {
+    var orientation = Orientation.vertical {
         didSet {
             setNeedsLayout()
         }
@@ -42,23 +42,23 @@ class LinearLayout: UIView {
     }
 
     convenience init(orientation: Orientation, padding: Edge = EdgeZero) {
-        self.init(frame: CGRectZero)
+        self.init(frame: CGRect.zero)
         self.orientation = orientation
         self.padding = padding
     }
 
     convenience init(padding: Edge) {
-        self.init(frame: CGRectZero)
+        self.init(frame: CGRect.zero)
         self.padding = padding
     }
 
-    override func addSubview(view: UIView) {
+    override func addSubview(_ view: UIView) {
         super.addSubview(view)
         view.layoutParams = LinearLayoutParams()
     }
 
-    func addView(view: UIView, width: CGFloat = LayoutParams.WrapContent, height: CGFloat = LayoutParams.WrapContent,
-                 margin: Edge = EdgeZero, align: Alignment = .Left, fill: CGFloat = 0) {
+    func addView(_ view: UIView, width: CGFloat = LayoutParams.WrapContent, height: CGFloat = LayoutParams.WrapContent,
+                 margin: Edge = EdgeZero, align: Alignment = .left, fill: CGFloat = 0) {
         super.addSubview(view)
         let lp = LinearLayoutParams()
         lp.width = width
@@ -69,11 +69,11 @@ class LinearLayout: UIView {
         view.layoutParams = lp
     }
 
-    override func sizeThatFits(size: CGSize) -> CGSize {
+    override func sizeThatFits(_ size: CGSize) -> CGSize {
         let sizes: [CGSize]
-        var measuredSize = CGSizeZero
+        var measuredSize = CGSize.zero
 
-        if orientation == .Horizontal {
+        if orientation == .horizontal {
             sizes = calculateHorizontalSizes(size)
             for size in sizes {
                 measuredSize.width += size.width
@@ -91,7 +91,7 @@ class LinearLayout: UIView {
     }
 
     override func layoutSubviews() {
-        if orientation == .Horizontal {
+        if orientation == .horizontal {
             let sizes = calculateHorizontalSizes(frame.size)
             layoutHorizontally(sizes)
         } else {
@@ -102,15 +102,15 @@ class LinearLayout: UIView {
 
     // MARK:- Private
 
-    private func calculateHorizontalSizes(size: CGSize) -> [CGSize] {
+    private func calculateHorizontalSizes(_ size: CGSize) -> [CGSize] {
         let size = padding.shrinkSize(size)
         let undefined: CGFloat = -1
         var availableWidth = size.width
         var totalFill: CGFloat = 0
-        var sizes = [CGSize](count: subviews.count, repeatedValue: CGSizeMake(undefined, undefined))
+        var sizes = [CGSize](repeating: CGSize(width: undefined, height: undefined), count: subviews.count)
 
-        for (index, view) in subviews.enumerate() {
-            if view.hidden {
+        for (index, view) in subviews.enumerated() {
+            if view.isHidden {
                 sizes[index].width = 0
                 sizes[index].height = 0
                 continue
@@ -126,7 +126,7 @@ class LinearLayout: UIView {
                 case LayoutParams.MatchParent:
                     viewWidth = availableWidth - margin
                 case LayoutParams.WrapContent:
-                    let availableSize = CGSizeMake(availableWidth, size.height)
+                    let availableSize = CGSize(width: availableWidth, height: size.height)
                     measuredSize = view.sizeThatFits(availableSize)
                     viewWidth = measuredSize!.width
                 default:
@@ -138,7 +138,7 @@ class LinearLayout: UIView {
                 viewWidth = min(viewWidth, availableWidth - margin)
 
                 sizes[index].width = viewWidth
-                if let measuredSize = measuredSize where measuredSize.width == viewWidth {
+                if let measuredSize = measuredSize, measuredSize.width == viewWidth {
                     sizes[index].height = measuredSize.height
                 }
 
@@ -146,8 +146,8 @@ class LinearLayout: UIView {
             }
         }
 
-        for (index, view) in subviews.enumerate() {
-            if !view.hidden, let spec = view.layoutParams as? LinearLayoutParams {
+        for (index, view) in subviews.enumerated() {
+            if !view.isHidden, let spec = view.layoutParams as? LinearLayoutParams {
                 let margin = spec.margin.top + spec.margin.bottom
 
                 if spec.fill > 0 && availableWidth > 0 {
@@ -166,7 +166,7 @@ class LinearLayout: UIView {
                 case LayoutParams.WrapContent:
                     viewHeight = sizes[index].height
                     if viewHeight == undefined {
-                        let availableSize = CGSizeMake(sizes[index].width, size.height)
+                        let availableSize = CGSize(width: sizes[index].width, height: size.height)
                         let measuredSize = view.sizeThatFits(availableSize)
                         viewHeight = measuredSize.height
                     }
@@ -186,15 +186,15 @@ class LinearLayout: UIView {
         return sizes
     }
 
-    private func calculateVerticalSizes(size: CGSize) -> [CGSize] {
+    private func calculateVerticalSizes(_ size: CGSize) -> [CGSize] {
         let size = padding.shrinkSize(size)
         let undefined: CGFloat = -1
         var availableHeight = size.height
         var totalFill: CGFloat = 0
-        var sizes = [CGSize](count: subviews.count, repeatedValue: CGSizeMake(undefined, undefined))
+        var sizes = [CGSize](repeating: CGSize(width: undefined, height: undefined), count: subviews.count)
 
-        for (index, view) in subviews.enumerate() {
-            if view.hidden {
+        for (index, view) in subviews.enumerated() {
+            if view.isHidden {
                 sizes[index].width = 0
                 sizes[index].height = 0
                 continue
@@ -210,7 +210,7 @@ class LinearLayout: UIView {
                 case LayoutParams.MatchParent:
                     viewHeight = availableHeight - margin
                 case LayoutParams.WrapContent:
-                    let availableSize = CGSizeMake(size.width, availableHeight)
+                    let availableSize = CGSize(width: size.width, height: availableHeight)
                     measuredSize = view.sizeThatFits(availableSize)
                     viewHeight = measuredSize!.height
                 default:
@@ -222,7 +222,7 @@ class LinearLayout: UIView {
                 viewHeight = min(viewHeight, availableHeight - margin)
 
                 sizes[index].height = viewHeight
-                if let measuredSize = measuredSize where measuredSize.height == viewHeight {
+                if let measuredSize = measuredSize, measuredSize.height == viewHeight {
                     sizes[index].width = measuredSize.width
                 }
 
@@ -230,8 +230,8 @@ class LinearLayout: UIView {
             }
         }
 
-        for (index, view) in subviews.enumerate() {
-            if !view.hidden, let spec = view.layoutParams as? LinearLayoutParams {
+        for (index, view) in subviews.enumerated() {
+            if !view.isHidden, let spec = view.layoutParams as? LinearLayoutParams {
                 let margin = spec.margin.left + spec.margin.right
 
                 if spec.fill > 0 && availableHeight > 0 {
@@ -250,7 +250,7 @@ class LinearLayout: UIView {
                 case LayoutParams.WrapContent:
                     viewWidth = sizes[index].width
                     if viewWidth == undefined {
-                        let availableSize = CGSizeMake(size.width, sizes[index].height)
+                        let availableSize = CGSize(width: size.width, height: sizes[index].height)
                         let measuredSize = view.sizeThatFits(availableSize)
                         viewWidth = measuredSize.width
                     }
@@ -270,29 +270,29 @@ class LinearLayout: UIView {
         return sizes
     }
 
-    private func layoutHorizontally(sizes: [CGSize]) {
+    private func layoutHorizontally(_ sizes: [CGSize]) {
         let height = frame.size.height
         var left = padding.left
-        for (index, size) in sizes.enumerate() {
+        for (index, size) in sizes.enumerated() {
             let view = subviews[index]
-            if !view.hidden, let params = view.layoutParams as? LinearLayoutParams {
+            if !view.isHidden, let params = view.layoutParams as? LinearLayoutParams {
                 let margin = params.margin
                 var top: CGFloat
 
                 switch params.alignment {
-                case .Center:
+                case .center:
                     top = padding.top + margin.top + (height - size.height - padding.top - padding.bottom) / 2
-                case .Bottom:
+                case .bottom:
                     top = height - padding.bottom - size.height + margin.top
                 default:
                     top = padding.top + margin.top
                 }
 
-                view.frame = CGRectMake(
-                    left + margin.left,
-                    top,
-                    size.width - margin.left - margin.right,
-                    size.height - margin.top - margin.bottom)
+                view.frame = CGRect(
+                    x: left + margin.left,
+                    y: top,
+                    width: size.width - margin.left - margin.right,
+                    height: size.height - margin.top - margin.bottom)
 
                 view.layoutSubviews()
                 left += size.width
@@ -300,29 +300,29 @@ class LinearLayout: UIView {
         }
     }
 
-    private func layoutVertically(sizes: [CGSize]) {
+    private func layoutVertically(_ sizes: [CGSize]) {
         let width = frame.size.width
         var top = padding.top
-        for (index, size) in sizes.enumerate() {
+        for (index, size) in sizes.enumerated() {
             let view = subviews[index]
-            if !view.hidden, let params = view.layoutParams as? LinearLayoutParams {
+            if !view.isHidden, let params = view.layoutParams as? LinearLayoutParams {
                 let margin = params.margin
                 var left: CGFloat
 
                 switch params.alignment {
-                case .Center:
+                case .center:
                     left = padding.left + margin.left + (width - size.width - padding.left - padding.right) / 2
-                case .Right:
+                case .right:
                     left = width - padding.right - size.width + margin.left
                 default:
                     left = padding.left + margin.left
                 }
 
-                view.frame = CGRectMake(
-                    left,
-                    top + margin.top,
-                    size.width - margin.left - margin.right,
-                    size.height - margin.top - margin.bottom)
+                view.frame = CGRect(
+                    x: left,
+                    y: top + margin.top,
+                    width: size.width - margin.left - margin.right,
+                    height: size.height - margin.top - margin.bottom)
 
                 view.layoutSubviews()
                 top += size.height
