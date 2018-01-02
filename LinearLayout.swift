@@ -271,6 +271,7 @@ class LinearLayout: UIView {
     }
 
     private func layoutHorizontally(_ sizes: [CGSize]) {
+        let scale = UIScreen.main.scale
         let height = frame.size.height
         var left = padding.left
         for (index, size) in sizes.enumerated() {
@@ -289,8 +290,8 @@ class LinearLayout: UIView {
                 }
 
                 view.frame = CGRect(
-                    x: left + margin.left,
-                    y: top,
+                    x: round((left + margin.left) * scale) / scale,
+                    y: round(top * scale) / scale,
                     width: size.width - margin.left - margin.right,
                     height: size.height - margin.top - margin.bottom)
 
@@ -301,6 +302,7 @@ class LinearLayout: UIView {
     }
 
     private func layoutVertically(_ sizes: [CGSize]) {
+        let scale = UIScreen.main.scale
         let width = frame.size.width
         var top = padding.top
         for (index, size) in sizes.enumerated() {
@@ -319,8 +321,8 @@ class LinearLayout: UIView {
                 }
 
                 view.frame = CGRect(
-                    x: left,
-                    y: top + margin.top,
+                    x: round(left * scale) / scale,
+                    y: round((top + margin.top) * scale) / scale,
                     width: size.width - margin.left - margin.right,
                     height: size.height - margin.top - margin.bottom)
 
