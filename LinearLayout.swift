@@ -272,7 +272,7 @@ class LinearLayout: UIView {
 
     private func layoutHorizontally(_ sizes: [CGSize]) {
         let scale = UIScreen.main.scale
-        let height = frame.size.height
+        let height = frame.height
         var left = padding.left
         for (index, size) in sizes.enumerated() {
             let view = subviews[index]
@@ -303,7 +303,7 @@ class LinearLayout: UIView {
 
     private func layoutVertically(_ sizes: [CGSize]) {
         let scale = UIScreen.main.scale
-        let width = frame.size.width
+        let width = frame.width
         var top = padding.top
         for (index, size) in sizes.enumerated() {
             let view = subviews[index]
