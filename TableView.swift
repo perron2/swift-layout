@@ -26,7 +26,7 @@ class TableView<T:UIView>: UITableView {
     override func layoutSubviews() {
         super.layoutSubviews()
         if autoBounce {
-            bounces = contentSize.height > frame.height
+            bounces = contentSize.height > frame.size.height
         }
     }
 
