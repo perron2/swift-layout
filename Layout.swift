@@ -53,11 +53,11 @@ struct Edge {
 var EdgeZero = Edge(0)
 
 class LayoutParams {
-    static let MatchParent: CGFloat = -1
-    static let WrapContent: CGFloat = -2
+    static let matchParent: CGFloat = -1
+    static let wrapContent: CGFloat = -2
 
-    var width = MatchParent
-    var height = MatchParent
+    var width = matchParent
+    var height = matchParent
     var margin = EdgeZero
     var minWidth: CGFloat = 0
     var maxWidth: CGFloat = CGFloat.greatestFiniteMagnitude

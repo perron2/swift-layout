@@ -57,8 +57,14 @@ class LinearLayout: UIView {
         view.layoutParams = LinearLayoutParams()
     }
 
-    func addView(_ view: UIView, width: CGFloat = LayoutParams.WrapContent, height: CGFloat = LayoutParams.WrapContent,
-                 margin: Edge = EdgeZero, align: Alignment = .left, fill: CGFloat = 0) {
+    func addView(
+        _ view: UIView,
+        width: CGFloat = LayoutParams.wrapContent,
+        height: CGFloat = LayoutParams.wrapContent,
+        margin: Edge = EdgeZero,
+        align: Alignment = .left,
+        fill: CGFloat = 0
+    ) {
         super.addSubview(view)
         let lp = LinearLayoutParams()
         lp.width = width
@@ -123,9 +129,9 @@ class LinearLayout: UIView {
                 totalFill += spec.fill
 
                 switch spec.width {
-                case LayoutParams.MatchParent:
+                case LayoutParams.matchParent:
                     viewWidth = availableWidth - margin
-                case LayoutParams.WrapContent:
+                case LayoutParams.wrapContent:
                     let availableSize = CGSize(width: availableWidth, height: size.height)
                     measuredSize = view.sizeThatFits(availableSize)
                     viewWidth = measuredSize!.width
@@ -161,9 +167,9 @@ class LinearLayout: UIView {
 
                 var viewHeight: CGFloat = 0
                 switch spec.height {
-                case LayoutParams.MatchParent:
+                case LayoutParams.matchParent:
                     viewHeight = size.height - margin
-                case LayoutParams.WrapContent:
+                case LayoutParams.wrapContent:
                     viewHeight = sizes[index].height
                     if viewHeight == undefined {
                         let availableSize = CGSize(width: sizes[index].width, height: size.height)
@@ -207,9 +213,9 @@ class LinearLayout: UIView {
                 totalFill += spec.fill
 
                 switch spec.height {
-                case LayoutParams.MatchParent:
+                case LayoutParams.matchParent:
                     viewHeight = availableHeight - margin
-                case LayoutParams.WrapContent:
+                case LayoutParams.wrapContent:
                     let availableSize = CGSize(width: size.width, height: availableHeight)
                     measuredSize = view.sizeThatFits(availableSize)
                     viewHeight = measuredSize!.height
@@ -245,9 +251,9 @@ class LinearLayout: UIView {
 
                 var viewWidth: CGFloat = 0
                 switch spec.width {
-                case LayoutParams.MatchParent:
+                case LayoutParams.matchParent:
                     viewWidth = size.width - margin
-                case LayoutParams.WrapContent:
+                case LayoutParams.wrapContent:
                     viewWidth = sizes[index].width
                     if viewWidth == undefined {
                         let availableSize = CGSize(width: size.width, height: sizes[index].height)
