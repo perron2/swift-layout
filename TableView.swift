@@ -1,6 +1,6 @@
 import UIKit
 
-class TableView<T:UIView>: UITableView {
+class TableView<T: UIView>: UITableView {
     convenience init() {
         self.init(frame: CGRect.zero, style: .plain)
     }
@@ -30,7 +30,7 @@ class TableView<T:UIView>: UITableView {
         }
     }
 
-    // MARK:- Private
+    // MARK: - Private
 
     private func setup() {
         separatorInset = UIEdgeInsets.zero

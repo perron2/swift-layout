@@ -1,11 +1,11 @@
 import UIKit
 
-class TableViewCell<T:UIView>: UITableViewCell {
+class TableViewCell<T: UIView>: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setup()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setup()
@@ -14,9 +14,7 @@ class TableViewCell<T:UIView>: UITableViewCell {
     let view = T()
 
     override var contentView: UIView {
-        get {
-            return view
-        }
+        return view
     }
 
     override func sizeThatFits(_ size: CGSize) -> CGSize {
@@ -28,21 +26,21 @@ class TableViewCell<T:UIView>: UITableViewCell {
 
         return CGSize(width: size.width, height: ceil(contentSize.height + 0.5))
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
     }
 
-    // MARK:- Private
+    // MARK: - Private
 
     private var cellSize = CGSize.zero
 
     private func setup() {
         let view = UIView()
-        view.backgroundColor = UIColor(red: 65.5/100, green: 83.1/100, blue: 100/100, alpha: 0.5)
+        view.backgroundColor = UIColor(red: 65.5 / 100, green: 83.1 / 100, blue: 100 / 100, alpha: 0.5)
         selectedBackgroundView = view
         layoutMargins = UIEdgeInsets.zero
         preservesSuperviewLayoutMargins = false
-        self.addSubview(self.view)
+        addSubview(self.view)
     }
 }

@@ -21,10 +21,10 @@ struct Edge {
     }
 
     init(horizontal: CGFloat = 0, vertical: CGFloat = 0) {
-        self.left = horizontal
-        self.top = vertical
-        self.right = horizontal
-        self.bottom = vertical
+        left = horizontal
+        top = vertical
+        right = horizontal
+        bottom = vertical
     }
 
     func growSize(_ size: CGSize) -> CGSize {

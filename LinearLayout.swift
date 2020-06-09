@@ -106,7 +106,7 @@ class LinearLayout: UIView {
         }
     }
 
-    // MARK:- Private
+    // MARK: - Private
 
     private func calculateHorizontalSizes(_ size: CGSize) -> [CGSize] {
         let size = padding.shrinkSize(size)
@@ -156,7 +156,7 @@ class LinearLayout: UIView {
             if !view.isHidden, let spec = view.layoutParams as? LinearLayoutParams {
                 let margin = spec.margin.top + spec.margin.bottom
 
-                if spec.fill > 0 && availableWidth > 0 {
+                if spec.fill > 0, availableWidth > 0 {
                     let extra = availableWidth * spec.fill / totalFill
                     if extra > 0 {
                         sizes[index].width += extra
@@ -240,7 +240,7 @@ class LinearLayout: UIView {
             if !view.isHidden, let spec = view.layoutParams as? LinearLayoutParams {
                 let margin = spec.margin.left + spec.margin.right
 
-                if spec.fill > 0 && availableHeight > 0 {
+                if spec.fill > 0, availableHeight > 0 {
                     let extra = availableHeight * spec.fill / totalFill
                     if extra > 0 {
                         sizes[index].width = undefined
@@ -272,7 +272,7 @@ class LinearLayout: UIView {
                 sizes[index].height += (spec.margin.top + spec.margin.bottom)
             }
         }
-        
+
         return sizes
     }
 
@@ -299,7 +299,8 @@ class LinearLayout: UIView {
                     x: round((left + margin.left) * scale) / scale,
                     y: round(top * scale) / scale,
                     width: size.width - margin.left - margin.right,
-                    height: size.height - margin.top - margin.bottom)
+                    height: size.height - margin.top - margin.bottom
+                )
 
                 view.layoutSubviews()
                 left += size.width
@@ -330,7 +331,8 @@ class LinearLayout: UIView {
                     x: round(left * scale) / scale,
                     y: round((top + margin.top) * scale) / scale,
                     width: size.width - margin.left - margin.right,
-                    height: size.height - margin.top - margin.bottom)
+                    height: size.height - margin.top - margin.bottom
+                )
 
                 view.layoutSubviews()
                 top += size.height
