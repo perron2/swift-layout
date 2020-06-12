@@ -40,13 +40,21 @@ struct Edge {
     }
 
     func growRect(_ rect: CGRect) -> CGRect {
-        return CGRect(x: rect.origin.x - left, y: rect.origin.y - top,
-                      width: rect.width + left + right, height: rect.height + top + bottom)
+        return CGRect(
+            x: rect.origin.x - left,
+            y: rect.origin.y - top,
+            width: rect.width + left + right,
+            height: rect.height + top + bottom
+        )
     }
 
     func shrinkRect(_ rect: CGRect) -> CGRect {
-        return CGRect(x: rect.origin.x + left, y: rect.origin.y + top,
-                      width: rect.width - left - right, height: rect.height - top - bottom)
+        return CGRect(
+            x: rect.origin.x + left,
+            y: rect.origin.y + top,
+            width: rect.width - left - right,
+            height: rect.height - top - bottom
+        )
     }
 }
 
@@ -76,13 +84,21 @@ extension UIView {
                 return lp
             }
             let lp = LayoutParams()
-            objc_setAssociatedObject(self, &Keys.layoutParamsKey,
-                                     lp, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(
+                self,
+                &Keys.layoutParamsKey,
+                lp,
+                .OBJC_ASSOCIATION_RETAIN_NONATOMIC
+            )
             return lp
         }
         set {
-            objc_setAssociatedObject(self, &Keys.layoutParamsKey,
-                                     newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(
+                self,
+                &Keys.layoutParamsKey,
+                newValue,
+                .OBJC_ASSOCIATION_RETAIN_NONATOMIC
+            )
         }
     }
 }
