@@ -37,8 +37,6 @@ class TableView<T: UIView>: UITableView {
         register(TableViewCell<T>.self, forCellReuseIdentifier: "cell")
         rowHeight = UITableView.automaticDimension
         estimatedRowHeight = Styles.minTouchSize
-        if #available(iOS 9, *) {
-            cellLayoutMarginsFollowReadableWidth = false
-        }
+        cellLayoutMarginsFollowReadableWidth = false
     }
 }

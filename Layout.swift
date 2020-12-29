@@ -74,7 +74,7 @@ class LayoutParams {
 }
 
 extension UIView {
-    private struct Keys {
+    private enum Keys {
         static var layoutParamsKey = "layoutParams"
     }
 
