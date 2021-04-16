@@ -216,7 +216,8 @@ class LinearLayout: UIView {
                 case LayoutParams.matchParent:
                     viewHeight = availableHeight - margin
                 case LayoutParams.wrapContent:
-                    let availableSize = CGSize(width: size.width, height: availableHeight)
+                    let horizontalMargins = spec.margin.left + spec.margin.right
+                    let availableSize = CGSize(width: size.width - horizontalMargins, height: availableHeight)
                     measuredSize = view.sizeThatFits(availableSize)
                     viewHeight = measuredSize!.height
                 default:

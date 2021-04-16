@@ -68,9 +68,9 @@ class LayoutParams {
     var height = matchParent
     var margin = EdgeZero
     var minWidth: CGFloat = 0
-    var maxWidth: CGFloat = CGFloat.greatestFiniteMagnitude
+    var maxWidth = CGFloat.greatestFiniteMagnitude
     var minHeight: CGFloat = 0
-    var maxHeight: CGFloat = CGFloat.greatestFiniteMagnitude
+    var maxHeight = CGFloat.greatestFiniteMagnitude
 }
 
 extension UIView {
