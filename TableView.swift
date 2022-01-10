@@ -15,7 +15,7 @@ class TableView<T: UIView>: UITableView {
         setup()
     }
 
-    var autoBounce: Bool = true
+    var autoBounce = true
 
     func cell(_ indexPath: IndexPath) -> TableViewCell<T> {
         let cell = dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell<T>
