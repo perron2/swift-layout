@@ -66,13 +66,18 @@ class LinearLayout: UIView {
         fill: CGFloat = 0
     ) {
         super.addSubview(view)
-        let lp = LinearLayoutParams()
-        lp.width = width
-        lp.height = height
-        lp.margin = margin
-        lp.alignment = align
-        lp.fill = fill
-        view.layoutParams = lp
+        let lp = view.layoutParams
+        let llp = lp as? LinearLayoutParams ?? LinearLayoutParams()
+        llp.minWidth = lp.minWidth
+        llp.maxWidth = lp.maxWidth
+        llp.minHeight = lp.minHeight
+        llp.maxHeight = lp.maxHeight
+        llp.width = width
+        llp.height = height
+        llp.margin = margin
+        llp.alignment = align
+        llp.fill = fill
+        view.layoutParams = llp
     }
 
     override func sizeThatFits(_ size: CGSize) -> CGSize {
@@ -161,7 +166,7 @@ class LinearLayout: UIView {
                     if extra > 0 {
                         sizes[index].width += extra
                         sizes[index].height = undefined
-                        availableWidth -= extra
+                        // availableWidth -= extra
                     }
                 }
 
@@ -246,7 +251,7 @@ class LinearLayout: UIView {
                     if extra > 0 {
                         sizes[index].width = undefined
                         sizes[index].height += extra
-                        availableHeight -= extra
+                        // availableHeight -= extra
                     }
                 }
 
