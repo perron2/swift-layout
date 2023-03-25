@@ -30,6 +30,10 @@ class TableView<T: UIView>: UITableView {
         }
     }
 
+    func forceLayoutSubviews() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) { self.layoutSubviews() }
+    }
+
     // MARK: - Private
 
     private func setup() {

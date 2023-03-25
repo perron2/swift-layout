@@ -134,14 +134,14 @@ class LinearLayout: UIView {
                 totalFill += spec.fill
 
                 switch spec.width {
-                case LayoutParams.matchParent:
-                    viewWidth = availableWidth - margin
-                case LayoutParams.wrapContent:
-                    let availableSize = CGSize(width: availableWidth, height: size.height)
-                    measuredSize = view.sizeThatFits(availableSize)
-                    viewWidth = measuredSize!.width
-                default:
-                    viewWidth = spec.width
+                    case LayoutParams.matchParent:
+                        viewWidth = availableWidth - margin
+                    case LayoutParams.wrapContent:
+                        let availableSize = CGSize(width: availableWidth, height: size.height)
+                        measuredSize = view.sizeThatFits(availableSize)
+                        viewWidth = measuredSize!.width
+                    default:
+                        viewWidth = spec.width
                 }
 
                 viewWidth = max(viewWidth, spec.minWidth)
@@ -172,17 +172,17 @@ class LinearLayout: UIView {
 
                 var viewHeight: CGFloat = 0
                 switch spec.height {
-                case LayoutParams.matchParent:
-                    viewHeight = size.height - margin
-                case LayoutParams.wrapContent:
-                    viewHeight = sizes[index].height
-                    if viewHeight == undefined {
-                        let availableSize = CGSize(width: sizes[index].width, height: size.height)
-                        let measuredSize = view.sizeThatFits(availableSize)
-                        viewHeight = measuredSize.height
-                    }
-                default:
-                    viewHeight = spec.height
+                    case LayoutParams.matchParent:
+                        viewHeight = size.height - margin
+                    case LayoutParams.wrapContent:
+                        viewHeight = sizes[index].height
+                        if viewHeight == undefined {
+                            let availableSize = CGSize(width: sizes[index].width, height: size.height)
+                            let measuredSize = view.sizeThatFits(availableSize)
+                            viewHeight = measuredSize.height
+                        }
+                    default:
+                        viewHeight = spec.height
                 }
 
                 viewHeight = max(viewHeight, spec.minHeight)
@@ -218,15 +218,15 @@ class LinearLayout: UIView {
                 totalFill += spec.fill
 
                 switch spec.height {
-                case LayoutParams.matchParent:
-                    viewHeight = availableHeight - margin
-                case LayoutParams.wrapContent:
-                    let horizontalMargins = spec.margin.left + spec.margin.right
-                    let availableSize = CGSize(width: size.width - horizontalMargins, height: availableHeight)
-                    measuredSize = view.sizeThatFits(availableSize)
-                    viewHeight = measuredSize!.height
-                default:
-                    viewHeight = spec.height
+                    case LayoutParams.matchParent:
+                        viewHeight = availableHeight - margin
+                    case LayoutParams.wrapContent:
+                        let horizontalMargins = spec.margin.left + spec.margin.right
+                        let availableSize = CGSize(width: size.width - horizontalMargins, height: availableHeight)
+                        measuredSize = view.sizeThatFits(availableSize)
+                        viewHeight = measuredSize!.height
+                    default:
+                        viewHeight = spec.height
                 }
 
                 viewHeight = max(viewHeight, spec.minHeight)
@@ -257,17 +257,17 @@ class LinearLayout: UIView {
 
                 var viewWidth: CGFloat = 0
                 switch spec.width {
-                case LayoutParams.matchParent:
-                    viewWidth = size.width - margin
-                case LayoutParams.wrapContent:
-                    viewWidth = sizes[index].width
-                    if viewWidth == undefined {
-                        let availableSize = CGSize(width: size.width, height: sizes[index].height)
-                        let measuredSize = view.sizeThatFits(availableSize)
-                        viewWidth = measuredSize.width
-                    }
-                default:
-                    viewWidth = spec.width
+                    case LayoutParams.matchParent:
+                        viewWidth = size.width - margin
+                    case LayoutParams.wrapContent:
+                        viewWidth = sizes[index].width
+                        if viewWidth == undefined {
+                            let availableSize = CGSize(width: size.width, height: sizes[index].height)
+                            let measuredSize = view.sizeThatFits(availableSize)
+                            viewWidth = measuredSize.width
+                        }
+                    default:
+                        viewWidth = spec.width
                 }
 
                 viewWidth = max(viewWidth, spec.minWidth)
@@ -293,12 +293,12 @@ class LinearLayout: UIView {
                 var top: CGFloat
 
                 switch params.alignment {
-                case .center:
-                    top = padding.top + margin.top + (height - size.height - padding.top - padding.bottom) / 2
-                case .bottom:
-                    top = height - padding.bottom - size.height + margin.top
-                default:
-                    top = padding.top + margin.top
+                    case .center:
+                        top = padding.top + margin.top + (height - size.height - padding.top - padding.bottom) / 2
+                    case .bottom:
+                        top = height - padding.bottom - size.height + margin.top
+                    default:
+                        top = padding.top + margin.top
                 }
 
                 view.frame = CGRect(
@@ -325,12 +325,12 @@ class LinearLayout: UIView {
                 var left: CGFloat
 
                 switch params.alignment {
-                case .center:
-                    left = padding.left + margin.left + (width - size.width - padding.left - padding.right) / 2
-                case .right:
-                    left = width - padding.right - size.width + margin.left
-                default:
-                    left = padding.left + margin.left
+                    case .center:
+                        left = padding.left + margin.left + (width - size.width - padding.left - padding.right) / 2
+                    case .right:
+                        left = width - padding.right - size.width + margin.left
+                    default:
+                        left = padding.left + margin.left
                 }
 
                 view.frame = CGRect(
