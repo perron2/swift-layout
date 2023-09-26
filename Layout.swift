@@ -74,19 +74,17 @@ class LayoutParams {
 }
 
 extension UIView {
-    private enum Keys {
-        static var layoutParamsKey = "layoutParams"
-    }
+    private static var layoutParamsKey: Void?
 
     var layoutParams: LayoutParams {
         get {
-            if let lp = objc_getAssociatedObject(self, &Keys.layoutParamsKey) as? LayoutParams {
+            if let lp = objc_getAssociatedObject(self, &Self.layoutParamsKey) as? LayoutParams {
                 return lp
             }
             let lp = LayoutParams()
             objc_setAssociatedObject(
                 self,
-                &Keys.layoutParamsKey,
+                &Self.layoutParamsKey,
                 lp,
                 .OBJC_ASSOCIATION_RETAIN_NONATOMIC
             )
@@ -95,7 +93,7 @@ extension UIView {
         set {
             objc_setAssociatedObject(
                 self,
-                &Keys.layoutParamsKey,
+                &Self.layoutParamsKey,
                 newValue,
                 .OBJC_ASSOCIATION_RETAIN_NONATOMIC
             )
